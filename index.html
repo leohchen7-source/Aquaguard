@@ -42,7 +42,7 @@
 
   a { color: var(--accent-light); text-decoration: none; }
 
-  /* NAV */
+  /* navigation things */
   nav {
     padding: 20px 48px;
     display: flex;
@@ -79,7 +79,7 @@
   nav ul li a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color 0.2s; }
   nav ul li a:hover { color: var(--text); }
 
-  /* HERO */
+  /* hero */
   .hero { text-align: center; padding: 100px 48px 64px; }
   .hero-badge {
     display: inline-flex;
@@ -115,14 +115,14 @@
   .hero h1 em { font-style: normal; color: var(--accent-light); }
   .hero p { font-size: 17px; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.7; }
 
-  /* SECTIONS */
+  /* Sections */
   section { max-width: 1100px; margin: 0 auto; padding: 80px 48px; }
   .section-header { margin-bottom: 52px; }
   .section-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 12px; }
   .section-title { font-family: var(--font-display); font-size: clamp(26px, 4vw, 40px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; color: var(--text); margin-bottom: 12px; }
   .section-sub { font-size: 16px; color: var(--muted); max-width: 480px; line-height: 1.65; }
 
-  /* PRICING CARDS */
+  /* pricing rectangles */
   .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
   .plan-card {
     background: var(--surface);
@@ -171,7 +171,7 @@
     transform: rotate(-45deg) translateY(-1px);
   }
 
-  /* BUTTONS */
+  /* buttons */
   .btn { display: block; width: 100%; padding: 13px; border-radius: var(--radius-sm); font-family: var(--font-display); font-size: 14px; font-weight: 600; text-align: center; cursor: pointer; border: none; transition: all 0.2s; letter-spacing: 0.02em; }
   .btn-primary { background: var(--accent); color: #fff; }
   .btn-primary:hover { background: #4dc1ff; transform: translateY(-1px); }
@@ -180,19 +180,17 @@
   .btn-green { background: var(--green); color: #fff; }
   .btn-green:hover { background: #059669; transform: translateY(-1px); }
 
-  /* PRODUCT CAROUSEL */
+  /* Product carousel */
   .carousel-track-outer { overflow: hidden; border-radius: var(--radius); }
   .carousel-track { display: flex; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
   .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; min-height: 400px; flex: 0 0 100%; }
   .product-visual {
-    background: linear-gradient(135deg, #1a0533 0%, #0d1117 100%);
     display: flex; align-items: center; justify-content: center;
     padding: 48px; position: relative; overflow: hidden;
   }
   .product-visual::before {
     content: ''; position: absolute;
     width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(0, 229, 255, 0.307) 0%, transparent 70%);
     border-radius: 50%;
   }
   .product-icon-wrap {
@@ -241,7 +239,7 @@
   .carousel-dot.active { background: var(--accent-light); transform: scale(1.3); }
   .carousel-counter { font-size: 13px; color: var(--muted); min-width: 36px; text-align: center; }
 
-  /* REPAIR */
+  /* Repair */
   .repair-hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 64px 56px; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
   .repair-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
   .repair-option { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
@@ -255,7 +253,7 @@
   .repair-stat-num { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--accent-light); letter-spacing: -0.03em; }
   .repair-stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-  /* FOOTER */
+  /* foot */
   footer { border-top: 1px solid var(--border); padding: 40px 48px; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 13px; }
   .section-divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
 
@@ -271,7 +269,7 @@
 </head>
 <body>
 
-<!-- NAV -->
+<!-- navigation -->
 <nav>
   <div class="logo"><img src="Aquaguard Logo.png" alt="Logo" style="width: 32px; height: 32px; margin-right: 10px;">Aqua<span>guard</span></div>
   <ul>
@@ -281,14 +279,14 @@
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- center info -->
 <div class="hero">
   <div class="hero-badge">New -- 2026 plans available!!</div>
   <h1>Smart drainage that <em>thinks</em> for you</h1>
   <p>AI-powered drain covers that monitor, alert, and prevent clogging — all in real time.</p>
 </div>
 
-<!-- PLANS -->
+<!-- Plans -->
 <div class="section-divider"></div>
 <section id="planes">
   <div class="section-header">
@@ -299,10 +297,10 @@
 
   <div class="plans-grid">
 
-    <!-- PLAN 1 -->
+    <!-- 1st plan -->
     <div class="plan-card">
       <div class="plan-name">Basic</div>
-      <div class="plan-price">$9<sub>/month</sub></div>
+      <div class="plan-price">$12.99<sub>/month</sub></div>
       <div class="plan-period">Monthly billing</div>
       <div class="plan-desc">Ideal for small areas with a few drains. Get real-time alerts and basic cloud monitoring without the complexity.</div>
       <ul class="plan-features">
@@ -315,11 +313,11 @@
       <button class="btn btn-outline">Start free</button>
     </div>
 
-    <!-- PLAN 2 (featured) -->
+    <!-- 2nd plan (featured) -->
     <div class="plan-card featured">
       <div class="plan-badge">Most popular</div>
       <div class="plan-name">Pro</div>
-      <div class="plan-price">$29<sub>/month</sub></div>
+      <div class="plan-price">$39.99<sub>/month</sub></div>
       <div class="plan-period">Monthly billing</div>
       <div class="plan-desc">For mid-size municipalities or contractors managing multiple drain zones with advanced analytics and priority support.</div>
       <ul class="plan-features">
@@ -333,10 +331,10 @@
       <button class="btn btn-primary">Choose Pro</button>
     </div>
 
-    <!-- PLAN 3 -->
+    <!-- 3rd plan -->
     <div class="plan-card">
       <div class="plan-name">Enterprise</div>
-      <div class="plan-price">$149<sub>/month</sub></div>
+      <div class="plan-price">$249.99<sub>/month</sub></div>
       <div class="plan-period">Monthly billing · minimum 25 units</div>
       <div class="plan-desc">Full-scale solution for cities and large infrastructure operators requiring custom deployments, API access, and dedicated support.</div>
       <ul class="plan-features">
@@ -353,7 +351,7 @@
   </div>
 </section>
 
-<!-- PRODUCT CAROUSEL -->
+<!-- Carousel of products -->
 <div class="section-divider"></div>
 <section id="producto">
   <div class="section-header">
@@ -365,17 +363,11 @@
   <div class="carousel-track-outer">
     <div class="carousel-track" id="carousel-track">
 
-      <!-- PRODUCT 1 -->
+      <!-- 1st product -->
       <div class="product-card">
         <div class="product-visual">
-          <div class="product-icon-wrap">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="12" y1="4.5" x2="12" y2="19.5"/>
-              <line x1="7" y1="7" x2="7" y2="17"/>
-              <line x1="17" y1="7" x2="17" y2="17"/>
-            </svg>
-          </div>
+            <img src="Aquaguard Product img.png" alt="Product image" style="width: 800px; height: 450px;" >
+
         </div>
         <div class="product-info">
           <div class="product-tag">Aquaguard XXI</div>
@@ -389,25 +381,18 @@
           </div>
           <div class="product-price-row">
             <div class="product-price-from">From</div>
-            <div class="product-price">$290</div>
-            <div class="product-price-old">$358</div>
+            <div class="product-price">$599</div>
+            <div class="product-price-old">$739</div>
             <div class="product-discount">−19%</div>
           </div>
           <button class="btn btn-green">Add to cart</button>
         </div>
       </div>
 
-      <!-- PRODUCT 2 -->
+      <!-- 2nd product -->
       <div class="product-card">
         <div class="product-visual">
-          <div class="product-icon-wrap">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="5" width="20" height="14" rx="2"/>
-              <path d="M5 9 L19 9"/>
-              <path d="M5 12 L19 12"/>
-              <path d="M5 15 L19 15"/>
-            </svg>
-          </div>
+          <img src="Aquaguard Rec product img.jpeg" alt="Product image" style="width: 800px; height: 450px;" >
         </div>
         <div class="product-info">
           <div class="product-tag">Aquaguard XXI</div>
@@ -421,15 +406,15 @@
           </div>
           <div class="product-price-row">
             <div class="product-price-from">From</div>
-            <div class="product-price">$295</div>
-            <div class="product-price-old">$360</div>
+            <div class="product-price">$649</div>
+            <div class="product-price-old">$792</div>
             <div class="product-discount">−18%</div>
           </div>
           <button class="btn btn-green">Add to cart</button>
         </div>
       </div>
 
-      <!-- PRODUCT 3 -->
+      <!-- 3rd product -->
       <div class="product-card">
         <div class="product-visual">
           <div class="product-icon-wrap">
@@ -451,16 +436,16 @@
           </div>
           <div class="product-price-row">
             <div class="product-price-from">From</div>
-            <div class="product-price">$500</div>
+            <div class="product-price">$999</div>
           </div>
           <button class="btn btn-green">Add to cart</button>
         </div>
       </div>
 
-    </div><!-- end carousel-track -->
-  </div><!-- end carousel-track-outer -->
+    </div><!-- end carousel track -->
+  </div><!-- end the carousel track router -->
 
-  <!-- ARROWS + DOTS -->
+  <!-- The arrows and the dots for navigation -->
   <div class="carousel-controls">
     <button class="carousel-btn" id="prev-btn" onclick="carouselMove(-1)">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
@@ -474,7 +459,7 @@
 
 </section>
 
-<!-- REPAIR -->
+<!-- Repair part -->
 <div class="section-divider"></div>
 <section id="reparacion">
   <div class="section-header">
@@ -494,11 +479,11 @@
     </div>
     <div class="repair-cta-area">
       <div class="repair-stat">
-        <div class="repair-stat-num">+70k</div>
-        <div class="repair-stat-label">Units serviced</div>
+        <div class="repair-stat-num">1</div>
+        <div class="repair-stat-label">Unit(s) serviced</div>
       </div>
       <div class="repair-stat">
-        <div class="repair-stat-num">94%</div>
+        <div class="repair-stat-num">100%</div>
         <div class="repair-stat-label">Satisfied customers</div>
       </div>
       <button class="btn btn-primary" style="margin-top: 4px;">Schedule Free Diagnosis</button>
@@ -537,7 +522,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <div class="section-divider"></div>
 <footer>
   <div class="logo_small"><img src="Aquaguard Logo.png" alt="Logo" style="width: 32px; height: 32px; margin-right: 10px;">Aqua<span>guard</span></div>
@@ -579,7 +563,7 @@
 
   goTo(0);
 
-  // SMOOTH NAV
+  // Thingy to navigate smoothly
   document.querySelectorAll('nav ul li a').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
@@ -588,7 +572,7 @@
     });
   });
 
-  // REPAIR OPTION HIGHLIGHT
+  // Repair option selection
   document.querySelectorAll('.repair-option').forEach(opt => {
     opt.addEventListener('click', () => {
       document.querySelectorAll('.repair-option').forEach(o => o.style.borderColor = '');
