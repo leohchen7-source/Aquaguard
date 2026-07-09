@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aquaguard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D1117;
+    --surface: #161B22;
+    --surface2: #21262D;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.18);
+    --text: #F0F6FC;
+    --muted: #8B949E;
+    --accent: #227ff8;
+    --accent-light: #7cd1fb;
+    --accent-bg: rgba(34, 134, 249, 0.12);
+    --green: #10B981;
+    --green-bg: rgba(16,185,129,0.1);
+    --amber: #F59E0B;
+    --amber-bg: rgba(245,158,11,0.1);
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  a { color: var(--accent-light); text-decoration: none; }
+
+  /* NAV */
+  nav {
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(44, 58, 78, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 10;
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    align-items: center;
+    display: flex;
+  }
+  .logo_small {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    align-items: center;
+    display: flex;
+  }
+  .logo_small span { color: var(--accent-light); }
+  .logo span { color: var(--accent-light); }
+  nav ul { list-style: none; display: flex; gap: 32px; }
+  nav ul li a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  nav ul li a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero { text-align: center; padding: 100px 48px 64px; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-bg);
+    color: var(--accent-light);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 28px;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent-light);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+  .hero h1 em { font-style: normal; color: var(--accent-light); }
+  .hero p { font-size: 17px; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+  /* SECTIONS */
+  section { max-width: 1100px; margin: 0 auto; padding: 80px 48px; }
+  .section-header { margin-bottom: 52px; }
+  .section-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 12px; }
+  .section-title { font-family: var(--font-display); font-size: clamp(26px, 4vw, 40px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; color: var(--text); margin-bottom: 12px; }
+  .section-sub { font-size: 16px; color: var(--muted); max-width: 480px; line-height: 1.65; }
+
+  /* PRICING CARDS */
+  .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
+  .plan-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    position: relative;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .plan-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+  .plan-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(145deg, var(--surface), rgba(124,58,237,0.06));
+  }
+  .plan-badge {
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 50px;
+    white-space: nowrap;
+  }
+  .plan-name { font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
+  .plan-price { font-family: var(--font-display); font-size: 42px; font-weight: 700; letter-spacing: -0.04em; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .plan-price sub { font-size: 16px; font-weight: 400; color: var(--muted); vertical-align: baseline; }
+  .plan-period { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+  .plan-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .plan-features { list-style: none; margin-bottom: 28px; }
+  .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: var(--muted); padding: 6px 0; }
+  .check-icon {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--green-bg);
+    border: 1px solid rgba(16,185,129,0.3);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .check-icon::after {
+    content: '';
+    width: 5px; height: 3px;
+    border-left: 1.5px solid var(--green);
+    border-bottom: 1.5px solid var(--green);
+    transform: rotate(-45deg) translateY(-1px);
+  }
+
+  /* BUTTONS */
+  .btn { display: block; width: 100%; padding: 13px; border-radius: var(--radius-sm); font-family: var(--font-display); font-size: 14px; font-weight: 600; text-align: center; cursor: pointer; border: none; transition: all 0.2s; letter-spacing: 0.02em; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #4dc1ff; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border-hover); }
+  .btn-outline:hover { background: var(--surface2); border-color: var(--accent-light); color: var(--accent-light); }
+  .btn-green { background: var(--green); color: #fff; }
+  .btn-green:hover { background: #059669; transform: translateY(-1px); }
+
+  /* PRODUCT CAROUSEL */
+  .carousel-track-outer { overflow: hidden; border-radius: var(--radius); }
+  .carousel-track { display: flex; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+  .product-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; min-height: 400px; flex: 0 0 100%; }
+  .product-visual {
+    background: linear-gradient(135deg, #1a0533 0%, #0d1117 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 48px; position: relative; overflow: hidden;
+  }
+  .product-visual::before {
+    content: ''; position: absolute;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.307) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .product-icon-wrap {
+    width: 120px; height: 120px;
+    background: var(--accent-bg);
+    border: 1px solid rgba(76, 204, 254, 0.756);
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .product-icon-wrap svg { width: 56px; height: 56px; stroke: var(--accent-light); fill: none; stroke-width: 1.5; }
+  .product-info { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+  .product-tag { display: inline-block; background: var(--amber-bg); color: var(--amber); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; border: 1px solid rgba(245,158,11,0.25); margin-bottom: 20px; width: fit-content; }
+  .product-name { font-family: var(--font-display); font-size: 30px; font-weight: 700; letter-spacing: -0.03em; color: var(--text); margin-bottom: 12px; }
+  .product-desc { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+  .product-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+  .spec-item { background: var(--surface2); border-radius: var(--radius-sm); padding: 10px 14px; }
+  .spec-label { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+  .spec-value { font-size: 13px; font-weight: 600; color: var(--text); }
+  .product-price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
+  .product-price { font-family: var(--font-display); font-size: 36px; font-weight: 700; letter-spacing: -0.03em; color: var(--text); }
+  .product-price-from { font-family: var(--font-display); font-size: 20px; font-weight: 500; letter-spacing: -0.03em; color: var(--text); }
+  .product-price-old { font-size: 18px; color: var(--muted); text-decoration: line-through; }
+  .product-discount { font-size: 13px; font-weight: 600; color: var(--green); background: var(--green-bg); padding: 3px 8px; border-radius: 50px; }
+
+  /* CAROUSEL CONTROLS */
+  .carousel-controls {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; margin-top: 20px;
+  }
+  .carousel-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--surface); border: 1px solid var(--border-hover);
+    color: var(--text); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .carousel-btn:hover { border-color: var(--accent-light); color: var(--accent-light); }
+  .carousel-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .carousel-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+  .carousel-dots { display: flex; gap: 8px; }
+  .carousel-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--border-hover); border: none; cursor: pointer; transition: all 0.2s;
+  }
+  .carousel-dot.active { background: var(--accent-light); transform: scale(1.3); }
+  .carousel-counter { font-size: 13px; color: var(--muted); min-width: 36px; text-align: center; }
+
+  /* REPAIR */
+  .repair-hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 64px 56px; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+  .repair-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+  .repair-option { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
+  .repair-option:hover { border-color: var(--accent); background: var(--accent-bg); transform: translateY(-2px); }
+  .repair-option-icon { width: 48px; height: 48px; background: var(--surface); border: 1px solid var(--border-hover); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+  .repair-option-icon svg { width: 22px; height: 22px; stroke: var(--accent-light); fill: none; stroke-width: 1.5; }
+  .repair-option-title { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .repair-option-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .repair-cta-area { display: flex; flex-direction: column; gap: 14px; min-width: 220px; }
+  .repair-stat { text-align: center; padding: 16px; background: var(--surface2); border-radius: var(--radius-sm); border: 1px solid var(--border); }
+  .repair-stat-num { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--accent-light); letter-spacing: -0.03em; }
+  .repair-stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 40px 48px; max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 13px; }
+  .section-divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+  @media (max-width: 900px) {
+    .plans-grid, .product-card, .repair-hero, .repair-options { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+    section { padding: 60px 24px; }
+    nav { padding: 20px 24px; }
+    .hero { padding: 80px 24px 48px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><img src="Aquaguard%20logo.png" alt="Logo" style="width: 32px; height: 32px; margin-right: 10px;">Aqua<span>guard</span></div>
+  <ul>
+    <li><a href="#planes">Plans</a></li>
+    <li><a href="#producto">Product</a></li>
+    <li><a href="#reparacion">Repair</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">New -- 2026 plans available!!</div>
+  <h1>Smart drainage that <em>thinks</em> for you</h1>
+  <p>AI-powered drain covers that monitor, alert, and prevent clogging — all in real time.</p>
+</div>
+
+<!-- PLANS -->
+<div class="section-divider"></div>
+<section id="planes">
+  <div class="section-header">
+    <div class="section-eyebrow">Subscriptions</div>
+    <h2 class="section-title">Choose Your Plan</h2>
+    <p class="section-sub">Monitor as many drains as you need. Scale anytime.</p>
+  </div>
+
+  <div class="plans-grid">
+
+    <!-- PLAN 1 -->
+    <div class="plan-card">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price">$9<sub>/month</sub></div>
+      <div class="plan-period">Monthly billing</div>
+      <div class="plan-desc">Ideal for small areas with a few drains. Get real-time alerts and basic cloud monitoring without the complexity.</div>
+      <ul class="plan-features">
+        <li><span class="check-icon"></span>Up to 5 drain units</li>
+        <li><span class="check-icon"></span>Fill-level alerts</li>
+        <li><span class="check-icon"></span>Cloud data storage (30 days)</li>
+        <li><span class="check-icon"></span>Email or SMS notifications</li>
+        <li><span class="check-icon"></span>Worker dispatch integration</li>
+      </ul>
+      <button class="btn btn-outline">Start free</button>
+    </div>
+
+    <!-- PLAN 2 (featured) -->
+    <div class="plan-card featured">
+      <div class="plan-badge">Most popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">$29<sub>/month</sub></div>
+      <div class="plan-period">Monthly billing</div>
+      <div class="plan-desc">For mid-size municipalities or contractors managing multiple drain zones with advanced analytics and priority support.</div>
+      <ul class="plan-features">
+        <li><span class="check-icon"></span>Up to 50 drain units</li>
+        <li><span class="check-icon"></span>AI clog prediction</li>
+        <li><span class="check-icon"></span>Cloud data storage (1 year)</li>
+        <li><span class="check-icon"></span>SMS + Email notifications</li>
+        <li><span class="check-icon"></span>Worker dispatch priority</li>
+        <li><span class="check-icon"></span>Advanced analytics dashboard</li>
+      </ul>
+      <button class="btn btn-primary">Choose Pro</button>
+    </div>
+
+    <!-- PLAN 3 -->
+    <div class="plan-card">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price">$79<sub>/month</sub></div>
+      <div class="plan-period">Monthly billing · minimum 25 units</div>
+      <div class="plan-desc">Full-scale solution for cities and large infrastructure operators requiring custom deployments, API access, and dedicated support.</div>
+      <ul class="plan-features">
+        <li><span class="check-icon"></span>Unlimited drain units</li>
+        <li><span class="check-icon"></span>Everything in Pro</li>
+        <li><span class="check-icon"></span>Unlimited cloud storage</li>
+        <li><span class="check-icon"></span>Dedicated account manager</li>
+        <li><span class="check-icon"></span>Custom API integration</li>
+        <li><span class="check-icon"></span>Guaranteed SLA 99.9%</li>
+      </ul>
+      <button class="btn btn-outline">Contact sales</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRODUCT CAROUSEL -->
+<div class="section-divider"></div>
+<section id="producto">
+  <div class="section-header">
+    <div class="section-eyebrow">Store</div>
+    <h2 class="section-title">Our Products</h2>
+    <p class="section-sub">Smart drain covers built to last, with AI and LoRa connectivity built in.</p>
+  </div>
+
+  <div class="carousel-track-outer">
+    <div class="carousel-track" id="carousel-track">
+
+      <!-- PRODUCT 1 -->
+      <div class="product-card">
+        <div class="product-visual">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="4.5" x2="12" y2="19.5"/>
+              <line x1="7" y1="7" x2="7" y2="17"/>
+              <line x1="17" y1="7" x2="17" y2="17"/>
+            </svg>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-tag">Aquaguard XXI</div>
+          <div class="product-name">Round version</div>
+          <div class="product-desc">Circular smart drain cover with an integrated basket that catches debris and prevents clogging. Sends fill-level data to the cloud via LoRa and alerts workers when it needs emptying.</div>
+          <div class="product-specs">
+            <div class="spec-item"><div class="spec-label">Size</div><div class="spec-value">60 cm, 70 cm, 80 cm</div></div>
+            <div class="spec-item"><div class="spec-label">Specifications</div><div class="spec-value">AI, sensors, and LoRa module</div></div>
+            <div class="spec-item"><div class="spec-label">Safety</div><div class="spec-value">High</div></div>
+            <div class="spec-item"><div class="spec-label">Warranty</div><div class="spec-value">5 yrs</div></div>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price-from">From</div>
+            <div class="product-price">$1,299</div>
+            <div class="product-price-old">$1,599</div>
+            <div class="product-discount">−19%</div>
+          </div>
+          <button class="btn btn-green">Add to cart</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 2 -->
+      <div class="product-card">
+        <div class="product-visual">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <path d="M5 9 L19 9"/>
+              <path d="M5 12 L19 12"/>
+              <path d="M5 15 L19 15"/>
+            </svg>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-tag">Aquaguard XXI</div>
+          <div class="product-name">Rectangular version</div>
+          <div class="product-desc">Same AI-powered monitoring in a rectangular form factor. Available in three standard sizes to fit existing urban drainage infrastructure.</div>
+          <div class="product-specs">
+            <div class="spec-item"><div class="spec-label">Size</div><div class="spec-value">40×60 cm, 50×50 cm, 60×70 cm</div></div>
+            <div class="spec-item"><div class="spec-label">Specifications</div><div class="spec-value">AI, sensors, and LoRa module</div></div>
+            <div class="spec-item"><div class="spec-label">Safety</div><div class="spec-value">High</div></div>
+            <div class="spec-item"><div class="spec-label">Warranty</div><div class="spec-value">5 yrs</div></div>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price-from">From</div>
+            <div class="product-price">$899</div>
+            <div class="product-price-old">$1,099</div>
+            <div class="product-discount">−18%</div>
+          </div>
+          <button class="btn btn-green">Add to cart</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 3 -->
+      <div class="product-card">
+        <div class="product-visual">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+              <line x1="15" y1="5" x2="19" y2="9"/>
+            </svg>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-tag">Custom order</div>
+          <div class="product-name">Custom Size</div>
+          <div class="product-desc">Need a non-standard drain? We manufacture to spec. Same smart basket, sensors, and cloud connectivity — built to your exact dimensions.</div>
+          <div class="product-specs">
+            <div class="spec-item"><div class="spec-label">Size</div><div class="spec-value">Custom</div></div>
+            <div class="spec-item"><div class="spec-label">Specifications</div><div class="spec-value">AI, sensors, and LoRa module</div></div>
+            <div class="spec-item"><div class="spec-label">Safety</div><div class="spec-value">High</div></div>
+            <div class="spec-item"><div class="spec-label">Warranty</div><div class="spec-value">5-10 yrs</div></div>
+          </div>
+          <div class="product-price-row">
+            <div class="product-price-from">From</div>
+            <div class="product-price">$549</div>
+          </div>
+          <button class="btn btn-green">Add to cart</button>
+        </div>
+      </div>
+
+    </div><!-- end carousel-track -->
+  </div><!-- end carousel-track-outer -->
+
+  <!-- ARROWS + DOTS -->
+  <div class="carousel-controls">
+    <button class="carousel-btn" id="prev-btn" onclick="carouselMove(-1)">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="carousel-dots" id="carousel-dots"></div>
+    <span class="carousel-counter" id="carousel-counter">1 / 3</span>
+    <button class="carousel-btn" id="next-btn" onclick="carouselMove(1)">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+</section>
+
+<!-- REPAIR -->
+<div class="section-divider"></div>
+<section id="reparacion">
+  <div class="section-header">
+    <div class="section-eyebrow">Technical service</div>
+    <h2 class="section-title">Your drain covers need maintenance?</h2>
+    <p class="section-sub">Certified technicians ready to service, recalibrate, and repair your Aquaguard units.</p>
+  </div>
+
+  <div class="repair-hero">
+    <div>
+      <div style="font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 12px; letter-spacing: -0.02em;">
+        Keep your network running at 100%.
+      </div>
+      <p style="font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 460px;">
+        Our technicians can replace baskets, recalibrate sensors, repair LoRa modules, and perform full unit diagnostics on-site — minimizing downtime across your drainage network.
+      </p>
+    </div>
+    <div class="repair-cta-area">
+      <div class="repair-stat">
+        <div class="repair-stat-num">+70k</div>
+        <div class="repair-stat-label">Units serviced</div>
+      </div>
+      <div class="repair-stat">
+        <div class="repair-stat-num">94%</div>
+        <div class="repair-stat-label">Satisfied customers</div>
+      </div>
+      <button class="btn btn-primary" style="margin-top: 4px;">Schedule Free Diagnosis</button>
+    </div>
+  </div>
+
+  <div class="repair-options">
+    <div class="repair-option">
+      <div class="repair-option-icon">
+        <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M31.449 6.748c-0.337-0.155-0.737-0.096-1.017 0.152l-5.041 4.528-4.551-4.669 4.506-5.204c0.245-0.283 0.305-0.673 0.152-1.016s-0.489-0.553-0.86-0.553h-0.271c-2.785 0-7.593 0.239-9.739 2.417l-0.433 0.43c-2.29 2.337-2.697 6.168-1.49 9.081l-11.54 11.778c-1.556 1.578-1.556 4.135 0 5.713l1.409 1.428c0.778 0.788 1.798 1.183 2.818 1.183s2.040-0.395 2.817-1.183l11.71-11.804c1.107 0.599 2.625 0.989 3.899 0.989 2.043 0 3.98-0.824 5.454-2.32l0.427-0.433c2.331-2.364 2.296-7.416 2.306-9.638 0.001-0.378-0.216-0.721-0.554-0.878zM28.302 15.906l-0.371 0.433c-1.117 1.134-2.578 1.677-4.114 1.677-0.76 0-1.784-0.143-2.476-0.431-0.625-0.259-1.206-0.634-1.725-1.107l-12.818 12.925c-0.376 0.382-0.876 0.592-1.408 0.592s-1.032-0.21-1.409-0.592l-1.408-1.427c-0.777-0.788-0.777-2.070-0.001-2.857l12.524-12.777c-0.42-0.611-0.706-1.278-0.877-1.968h-0.001c-0.482-1.95-0.201-4.644 1.313-6.189l0.431-0.435c1.298-1.317 4.67-1.707 6.537-1.822l-3.668 4.236c-0.328 0.379-0.311 0.95 0.038 1.309l5.798 5.948c0.352 0.362 0.92 0.383 1.299 0.047l4.082-3.676c-0.122 1.98-0.506 4.856-1.748 6.115z"></path>
+        </svg>
+      </div>
+      <div class="repair-option-title">Sensor Repair</div>
+      <div class="repair-option-desc">Recalibration or full replacement of fill-level and AI sensors.</div>
+    </div>
+    <div class="repair-option">
+      <div class="repair-option-icon">
+        <svg width="24" height="24" viewBox="0 -3 32 32">
+          <path transform="translate(-412.000000, -726.000000)" d="M439.429,738 L434,738 L434,734 L440,734 L439.429,738 L439.429,738 Z M438.571,744 L434,744 L434,740 L439.143,740 L438.571,744 L438.571,744 Z M438,748 C438,749.104 437.104,750 436,750 L434,750 L434,746 L438.286,746 L438,748 L438,748 Z M424,734 L432,734 L432,738 L424,738 L424,734 Z M424,740 L432,740 L432,744 L424,744 L424,740 Z M424,746 L432,746 L432,750 L424,750 L424,746 Z M422,738 L416.286,738 L416,734 L422,734 L422,738 L422,738 Z M422,744 L416.714,744 L416.429,740 L422,740 L422,744 L422,744 Z M422,750 L419,750 C417.896,750 417,749.104 417,748 L416.857,746 L422,746 L422,750 L422,750 Z M443,732 L436.474,732 L438.5,728 L441,728 C441.553,728 442,727.553 442,727 C442,726.447 441.553,726 441,726 L437,726 L433.916,732 L422.168,732 L419,726 L415,726 C414.447,726 414,726.447 414,727 C414,727.553 414.447,728 415,728 L417.5,728 L419.646,732 L413,732 C412.447,732 412,732.448 412,733 C412,733.553 412.447,734 413,734 L414,734 L415,748 C415,750.209 416.791,752 419,752 L436,752 C438.209,752 440,750.209 440,748 L442,734 L443,734 C443.553,734 444,733.553 444,733 C444,732.448 443.553,732 443,732 L443,732 Z">
+          </path>
+          </svg>
+      </div>
+      <div class="repair-option-title">Basket & Cover</div>
+      <div class="repair-option-desc">Basket cleaning, structural repair, or full cover replacement.</div>
+    </div>
+    <div class="repair-option">
+      <div class="repair-option-icon">
+        <svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26,22a4,4,0,0,0-2.67,1L10,16.36c0-.12,0-.24,0-.36s0-.24,0-.36L23.33,9A4,4,0,1,0,22,6a3.81,3.81,0,0,0,.23,1.27L9.29,13.74a4,4,0,1,0,0,4.52l12.94,6.47A3.81,3.81,0,0,0,22,26a4,4,0,1,0,4-4ZM26,4a2,2,0,1,1-2,2A2,2,0,0,1,26,4ZM6,18a2,2,0,1,1,2-2A2,2,0,0,1,6,18ZM26,28a2,2,0,1,1,2-2A2,2,0,0,1,26,28Z"/>
+        </svg>
+      </div>
+      <div class="repair-option-title">Connectivity</div>
+      <div class="repair-option-desc">LoRa module repair and cloud re-pairing for lost signal units.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="section-divider"></div>
+<footer>
+  <div class="logo_small"><img src="Aquaguard%20logo.png" alt="Logo" style="width: 32px; height: 32px; margin-right: 10px;">Aqua<span>guard</span></div>
+  <div>© 2026 Aquaguard · ALL RIGHTS RESERVED</div>
+  <div style="display:flex; gap: 20px;">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // CAROUSEL
+  let current = 0;
+  const total = 3;
+  const track = document.getElementById('carousel-track');
+  const dotsContainer = document.getElementById('carousel-dots');
+  const counter = document.getElementById('carousel-counter');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  function goTo(index) {
+    current = index;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    counter.textContent = (current + 1) + ' / ' + total;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+
+  function carouselMove(dir) { goTo(Math.max(0, Math.min(total - 1, current + dir))); }
+
+  goTo(0);
+
+  // SMOOTH NAV
+  document.querySelectorAll('nav ul li a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // REPAIR OPTION HIGHLIGHT
+  document.querySelectorAll('.repair-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.repair-option').forEach(o => o.style.borderColor = '');
+      opt.style.borderColor = 'var(--accent)';
+    });
+  });
+</script>
+</body>
+</html>
